@@ -1,0 +1,44 @@
+CREATE TABLE Cliente (
+  id INT(11) NOT NULL,
+  first_name VARCHAR(20) NOT NULL,
+  last_name VARCHAR(20) NOT NULL,
+  telefono INT(11) NOT NULL,
+  limite_credito DECIMAL NULL,
+  id_empleado_rep_ventas INT(11) NULL,
+  linea_direccion1 INT(11) NOT NULL,
+  linea_direccion2 INT(11) NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (linea_direccion1) REFERENCES Direcciones(id)
+);
+
+CREATE TABLE Direcciones (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    calle VARCHAR(100),
+    numero INT,
+    ciudad_id INT,
+    estado_id INT,
+    codigo_postal VARCHAR(10),
+    pais_id INT,
+    FOREIGN KEY (pais_id) REFERENCES Pais(id)
+);
+
+CREATE TABLE Ciudades (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    codigo_postal VARCHAR(10)
+    codigo_ciudad VARCHAR(10)
+);
+
+CREATE TABLE Estados (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    codigo_estado VARCHAR(10)
+);
+
+CREATE TABLE Paises (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    codigo_pais VARCHAR(10)
+);
+
+
