@@ -1,38 +1,24 @@
-CREATE TABLE Tercero (
+-- Definición de tablas
+CREATE TABLE Pais(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('cliente', 'empresa', 'proveedor', 'otro') NOT NULL,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100),
-    UNIQUE (email)
+    nombre VARCHAR(100),
+    codigo VARCHAR(10)
 );
 
-CREATE TABLE Cliente (
-    id_tercero INT PRIMARY KEY, 
-    preferencias VARCHAR(150), 
-    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
-);
-
-CREATE TABLE Empresa (
-    id_tercero INT PRIMARY KEY, 
-    numero_registro VARCHAR(50), 
-    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
-);
-
-CREATE TABLE Proveedor (
-    id_tercero INT PRIMARY KEY, 
-    tipo_servicio VARCHAR(100), 
-    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
-);
-
-
-CREATE TABLE Direccion_tercero(
+CREATE TABLE Region (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre_direccion VARCHAR(45),
-    tercero_id INT(11) NOT NULL,
-    direccion_id INT(11) NOT NULL,
-    FOREIGN KEY (tercero_id) REFERENCES Tercero(id),
-    FOREIGN KEY (direccion_id) REFERENCES Direccion(id)
+    nombre VARCHAR(100),
+    id_pais INT,
+    FOREIGN KEY (id_pais) REFERENCES Pais(id)
+);
+
+CREATE TABLE Ciudad(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100),
+    codigo_postal VARCHAR(10),
+    codigo_ciudad VARCHAR(10),
+    region_id INT NOT NULL,
+    FOREIGN KEY (region_id) REFERENCES Region(id)
 );
 
 CREATE TABLE Direccion(
@@ -46,6 +32,23 @@ CREATE TABLE Direccion(
     UNIQUE (calle, calle_complemento, numero, ciudad_id)
 );
 
+CREATE TABLE Tercero (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    tipo ENUM('cliente', 'empresa', 'proveedor', 'otro') NOT NULL,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    email VARCHAR(100),
+    UNIQUE (email)
+);
+
+CREATE TABLE Direccion_tercero(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_direccion VARCHAR(45),
+    tercero_id INT(11) NOT NULL,
+    direccion_id INT(11) NOT NULL,
+    FOREIGN KEY (tercero_id) REFERENCES Tercero(id),
+    FOREIGN KEY (direccion_id) REFERENCES Direccion(id)
+);
 
 CREATE TABLE Tercero_contacto (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -53,7 +56,6 @@ CREATE TABLE Tercero_contacto (
     telefono VARCHAR(20),
     FOREIGN KEY (id_tercero) REFERENCES Tercero(id)
 );
-
 
 CREATE TABLE Contacto(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -93,29 +95,6 @@ CREATE TABLE Tipo_telefono(
     tipo VARCHAR(50) NOT NULL
 );
 
-
-CREATE TABLE Ciudad(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100),
-    codigo_postal VARCHAR(10),
-    codigo_ciudad VARCHAR(10),
-    region_id INT NOT NULL,
-    FOREIGN KEY (region_id) REFERENCES Region(id)
-);
-
-CREATE TABLE Region (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100),
-    id_pais INT,
-    FOREIGN KEY (id_pais) REFERENCES Pais(id)
-);
-
-CREATE TABLE Pais(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100),
-    codigo VARCHAR(10)
-);
-
 CREATE TABLE Producto(
     id INT PRIMARY KEY AUTO_INCREMENT,
     ean VARCHAR(13),
@@ -132,8 +111,6 @@ CREATE TABLE Producto(
     FOREIGN KEY (proveedor_id) REFERENCES Proveedor(id_tercero),
     UNIQUE (ean)
 );
-
-
 
 CREATE TABLE Gama_producto(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -182,7 +159,6 @@ CREATE TABLE Detalle_pedido(
     FOREIGN KEY (producto_id) REFERENCES Producto(id)
 );
 
-
 CREATE TABLE Oficina(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100),
@@ -194,7 +170,6 @@ CREATE TABLE Oficina(
     FOREIGN KEY (telefono_id) REFERENCES Telefono(id)
 );
 
-
 CREATE TABLE Oficina_stock(
     id INT PRIMARY KEY AUTO_INCREMENT,
     oficina_id INT(11) NOT NULL,
@@ -202,4 +177,22 @@ CREATE TABLE Oficina_stock(
     cantidad INT(11) NOT NULL,
     FOREIGN KEY (oficina_id) REFERENCES Oficina(id),
     FOREIGN KEY (producto_id) REFERENCES Producto(id)
+);
+
+CREATE TABLE Cliente (
+    id_tercero INT PRIMARY KEY, 
+    preferencias VARCHAR(150), 
+    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
+);
+
+CREATE TABLE Empresa (
+    id_tercero INT PRIMARY KEY, 
+    numero_registro VARCHAR(50), 
+    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
+);
+
+CREATE TABLE Proveedor (
+    id_tercero INT PRIMARY KEY, 
+    tipo_servicio VARCHAR(100), 
+    FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
 );
