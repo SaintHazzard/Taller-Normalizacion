@@ -196,3 +196,5 @@ CREATE TABLE Proveedor (
     tipo_servicio VARCHAR(100), 
     FOREIGN KEY (id_tercero) REFERENCES Tercero (id)
 );
+
+![alt text](ERDpng.png)
