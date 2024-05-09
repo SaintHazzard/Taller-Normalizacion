@@ -1,0 +1,27 @@
+CREATE DATABASE  IF NOT EXISTS `GARDEN_DATABASE` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `GARDEN_DATABASE`;
+
+
+DROP TABLE IF EXISTS `Telefono`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Telefono` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numero` int NOT NULL,
+  `tipo_telefono` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tipo_telefono` (`tipo_telefono`),
+  CONSTRAINT `Telefono_ibfk_1` FOREIGN KEY (`tipo_telefono`) REFERENCES `Tipo_telefono` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Telefono`
+--
+
+LOCK TABLES `Telefono` WRITE;
+/*!40000 ALTER TABLE `Telefono` DISABLE KEYS */;
+INSERT INTO `Telefono` VALUES (6,1122334455,1),(7,1555666777,2),(8,1888999000,3),(9,1444333222,4),(10,1777888999,5),(11,1999888777,1),(12,1888777666,2),(13,1222111444,3),(14,1333444555,4),(15,1666777888,5),(16,1777444222,1),(17,1888333555,2),(18,1999222666,3),(19,1222333777,4),(20,1444666888,5),(21,1555999111,1),(22,1888222444,2),(23,1999111333,3),(24,1222444666,4),(25,1333777999,5);
+/*!40000 ALTER TABLE `Telefono` ENABLE KEYS */;
+UNLOCK TABLES;
+

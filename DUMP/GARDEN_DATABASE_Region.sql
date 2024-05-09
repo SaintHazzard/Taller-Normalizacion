@@ -1,0 +1,23 @@
+CREATE DATABASE  IF NOT EXISTS `GARDEN_DATABASE` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `GARDEN_DATABASE`;
+
+
+DROP TABLE IF EXISTS `Region`;
+
+
+CREATE TABLE `Region` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `id_pais` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_pais` (`id_pais`),
+  CONSTRAINT `Region_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `Pais` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC;
+
+
+LOCK TABLES `Region` WRITE;
+/*!40000 ALTER TABLE `Region` DISABLE KEYS */;
+INSERT INTO `Region` VALUES (1,'California',1),(2,'Florida',1),(3,'Nueva York',1),(4,'Madrid',2),(5,'Cataluña',2);
+/*!40000 ALTER TABLE `Region` ENABLE KEYS */;
+UNLOCK TABLES;
+

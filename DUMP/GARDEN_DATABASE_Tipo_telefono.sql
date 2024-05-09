@@ -1,0 +1,19 @@
+CREATE DATABASE  IF NOT EXISTS `GARDEN_DATABASE` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `GARDEN_DATABASE`;
+
+
+DROP TABLE IF EXISTS `Tipo_telefono`;
+
+CREATE TABLE `Tipo_telefono` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+LOCK TABLES `Tipo_telefono` WRITE;
+/*!40000 ALTER TABLE `Tipo_telefono` DISABLE KEYS */;
+INSERT INTO `Tipo_telefono` VALUES (1,'Móvil'),(2,'Casa'),(3,'Trabajo'),(4,'Fax'),(5,'Oficina');
+/*!40000 ALTER TABLE `Tipo_telefono` ENABLE KEYS */;
+UNLOCK TABLES;
+
